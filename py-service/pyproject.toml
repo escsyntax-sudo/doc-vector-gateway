@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doc-extractor-service"
+version = "0.1.0"
+description = "FastAPI document parsing and embedding service for the DOC vector gateway"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "uvicorn[standard]>=0.30,<1",
+    "python-multipart>=0.0.9,<1",
+    "pdfplumber>=0.11,<1",
+    "PyPDF2>=3.0.1,<4",
+    "openpyxl>=3.1,<4",
+]
+
+[project.optional-dependencies]
+ml = ["sentence-transformers>=3.0,<6"]
+dev = ["pytest>=8,<10", "httpx>=0.27,<1", "ruff>=0.8,<1"]
+
+[tool.setuptools.packages.find]
+include = ["doc_service*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
